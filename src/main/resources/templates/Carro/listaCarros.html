@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+	crossorigin="anonymous">
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+<title>Mensagem validação</title>
+</head>
+
+<body class="tada">
+  <a class="dropdown-item bg-dark shadow-lg p-2"></a>
+<h1 class="text-center h1-hover py-5 display-4 lead mt-2 text-primary h6 shadow-lg">Lista de carros: </h1>
+  <a class="dropdown-item bg-dark shadow-lg p-2"></a>
+
+
+<div class="container table-responsive mt-3 anyClass">
+<table class="table table-hover table-striped shadow-lg table-striped">
+  <thead>
+    <tr >
+      <th scope="col" >Id</th>
+      <th scope="col" >Modelo</th>
+      <th scope="col" >Cor</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="carro : ${carros}">
+      <th scope="row" th:text="${carro.id}" class="h6 lead"></th>
+      <td th:text="${carro.modelo}" class="h6 lead"></td>
+      <td th:text="${carro.cor}" class="h6 lead"></td>
+      <td><div class="btn-group float-right">
+      <a class="btn btn-sm btn-rounded btn-primary mx-5 px-5" th:href="@{/carro/alterar/{idCarro}(idCarro=${carro.id})}">Alterar</a>
+      <a class="btn btn-sm btn-rounded btn-danger mx-5 px-5"  th:href="@{/carro/excluir/{idCarro}(idCarro=${carro.id})}">Excluir</a>
+      </div></td>
+    </tr>
+  </tbody>
+</table>
+<a class="btn btn-block btn-rounded btn-success" th:href="@{/carro/cadastrar}">CADASTRAR NOVO CARRO</a>
+</div>
+
+
+
+
+	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+		crossorigin="anonymous"></script>
+
+</body>
+
+<style>
+
+.anyClass {
+  height:325px;
+  overflow-y: scroll;
+}
+
+body { 
+  font-family: "14"; 
+  src: formato url ("Concert One.eot?") (" 
+  eot"), formato url ("Concert One.woff") ("woff"), formato 
+  url ("Concert One.ttf") ("truetype") ; 
+} h1, .h1-hover {
+color: #FFFFFF;
+background: #FFFFFF;
+text-shadow: 1px 3px 0 #969696, 1px 13px 5px #aba8a8;
+}
+
+
+.alert {
+background:none repeat 0 0 #FF9932;
+
+
+-----other style-----
+
+background-color:#FF9932;
+}
+.tada {
+
+  -webkit-animation-name: tada;
+  animation-name: tada;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  }
+  @-webkit-keyframes tada {
+  0% {
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+  }
+  10%, 20% {
+  -webkit-transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+  transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+  }
+  30%, 50%, 70%, 90% {
+  -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+  transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+  }
+  40%, 60%, 80% {
+  -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+  transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+  }
+  100% {
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+  }
+  }
+  @keyframes tada {
+  0% {
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+  }
+  10%, 20% {
+  -webkit-transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+  transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+  }
+  30%, 50%, 70%, 90% {
+  -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+  transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+  }
+  40%, 60%, 80% {
+  -webkit-transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+  transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+  }
+  100% {
+  -webkit-transform: scale3d(1, 1, 1);
+  transform: scale3d(1, 1, 1);
+  }
+  } 
+
+
+</style>
+
+</html>

@@ -17,12 +17,12 @@ import javassist.tools.rmi.ObjectNotFoundException;
 public class DocumentoController {
 
 	@Autowired
-	private DocumentoService ds;
+	DocumentoService ds;
 
-	@GetMapping("/listarDocumentos")
-	public ModelAndView listarTodosDocumentos() {
+	@GetMapping("/listar")
+	public ModelAndView listarDocumento() {
 		ModelAndView mv = new ModelAndView("documento/listaDocumento");
-		mv.addObject("documentos", ds.buscarPorTodosDocumentos());
+		mv.addObject("documentos", ds.searchAll());
 		return mv;
 	}
 
@@ -31,32 +31,33 @@ public class DocumentoController {
 		ModelAndView mv = new ModelAndView("documento/cadastraDocumento");
 		mv.addObject("documento", new Documento());
 		return mv;
-
 	}
 
 	@PostMapping("/salvar")
 	public ModelAndView salvarDocumento(Documento documento) {
-		ds.DocumentoSalvar(documento);
-		return listarTodosDocumentos();
+		ds.save(documento);
+		return listarDocumento();
 	}
-	
+
 	@GetMapping("/alterar/{id}")
-	public ModelAndView alterarDocumento(@PathVariable("id") long idDocumento) throws ObjectNotFoundException {
-		ModelAndView mv = new ModelAndView("documento/alteraDocumento");
-		mv.addObject("documento", ds.buscarPorId(idDocumento));
-		return mv;
+	public ModelAndView alterarDocumento(@PathVariable("id") Integer id) throws ObjectNotFoundException {
+			ModelAndView mv = new ModelAndView("documento/alteraDocumento");
+			mv.addObject("documento", ds.search(id));
+			return mv;
 	}
 	
 	@PostMapping("/alterar")
-	public ModelAndView alterar(Documento documentoAlterado) throws ObjectNotFoundException {
-		ds.salvarAlteracao(documentoAlterado);
-		return listarTodosDocumentos();
+	public ModelAndView alterarDocumento(Documento documento) throws ObjectNotFoundException {
+		ds.edit(documento);
+		return listarDocumento();
 	}
 	
-	@GetMapping("/excluir/{id}")
-	public ModelAndView excluirDocumento(@PathVariable("id") long id) {
-		ds.exlcuir(id);
-		return listarTodosDocumentos();
+	@GetMapping("/deletar/{id}")
+	public ModelAndView deletarDocumento(@PathVariable("id") Integer id) {
+		ds.delete(id);
+		return listarDocumento();
 	}
+	
+	
 
 }

@@ -1,42 +1,54 @@
 package br.com.senac.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.senac.model.Documento;
 import br.com.senac.repository.DocumentoRepository;
 import javassist.tools.rmi.ObjectNotFoundException;
-import net.bytebuddy.dynamic.DynamicType.Builder.FieldDefinition.Optional;
 
 @Service
 public class DocumentoService {
 
 	@Autowired
-	private DocumentoRepository dr;
+	DocumentoRepository dc;
 
-	public Iterable<Documento> buscarPorTodosDocumentos() {
-		Iterable<Documento> documentos = dr.findAll();
-		return documentos;
+	public Documento search(Integer id) throws ObjectNotFoundException {
+
+		Optional<Documento> documento = dc.findById(id);
+
+		return documento.orElseThrow(() -> new ObjectNotFoundException(
+
+				"não encontrado. id: " + id + ", Tipo!" + Documento.class.getName()));
 	}
 
-	public Documento DocumentoSalvar(Documento documento) {
-		return dr.save(documento);
+	public List<Documento> searchAll() {
+		return dc.findAll();
 	}
 
-	public Documento buscarPorId(long id) throws ObjectNotFoundException {
-		java.util.Optional<Documento> documento = dr.findById(id);
-		return documento.orElseThrow(() -> new ObjectNotFoundException(" Documento não encontrado. id " + id));
+	public Documento save(Documento documento) {
+		return dc.save(documento);
 	}
 
-	public Documento salvarAlteracao(Documento documentoAlterado) throws ObjectNotFoundException {
-		Documento documento = buscarPorId(documentoAlterado.getId());
-		documento.setId(documentoAlterado.getId());
-		documento.setPlaca(documentoAlterado.getPlaca());
-		documento.setModelo(documentoAlterado.getModelo());
-		return DocumentoSalvar(documento);
+	public List<Documento> saveAll(List<Documento> documentos) {
+		return dc.saveAll(documentos);
 	}
 
-	public void exlcuir(long id) {
-		dr.deleteById(id);
+	public Documento edit(Documento documento) throws ObjectNotFoundException {
+		Documento documentoAntigo = search(documento.getId());
+
+		documentoAntigo.setId(documento.getId());
+		documentoAntigo.setNome(documento.getNome());
+		documentoAntigo.setCodigo(documento.getCodigo());
+
+		return save(documentoAntigo);
 	}
+
+	public void delete(Integer id) {
+		dc.deleteById(id);
+	}
+
 }

@@ -12,27 +12,27 @@
 <link rel="stylesheet"
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
-<title>Cadastro de carro</title>
+<title>Cadastro de documentos</title>
 </head>
 
 
 
 <body class="">
  <a class="dropdown-item bg-dark shadow-lg p-2 mt-2"></a>
-<h1 class="text-center h1-hover py-5 display-4 lead text-primary h6 shadow-lg">Cadastro de carros: </h1>
+<h1 class="text-center h1-hover py-5 display-4 lead text-primary h6 shadow-lg">Cadastro de documentos: </h1>
   <a class="dropdown-item bg-dark shadow-mt-0 p-2"></a>
 		<div class="container">
-	<form th:object="${carro}" th:action="@{/carro/salvar}" method="POST">
+	<form th:object="${documento}" th:action="@{/documento/salvar}" method="POST">
 		<div class="form-group mt-4">
-			<label class="h6 lead">Modelo</label> 
+			<label class="h6 lead">Placa</label> 
 			<input class="form-control"
-				th:field="*{modelo}" autofocus="autofocus"> <label
-				class="h6 lead">Cor</label> <input class="form-control"
-				th:field="*{cor}" autofocus="autofocus">
+				th:field="*{placa}" autofocus="autofocus"> <label
+				class="h6 lead">Modelo</label> <input class="form-control"
+				th:field="*{modelo}" autofocus="autofocus">
 		</div>
 		<div class="d-flex justify-content-around">
 	<button type="submit" class="btn btn-success btn-lg btn-rounded">Salvar</button>
-	<a class="btn btn-danger btn-lg btn-rounded" th:href="@{/carro/listarCarros}">Cancelar</a>
+	<a class="btn btn-danger btn-lg btn-rounded" th:href="@{/documento/listarTodosDocumentos}">Cancelar</a>
 	</div>
 	</form>
 		</div>

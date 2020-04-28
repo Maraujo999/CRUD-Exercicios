@@ -1,12 +1,15 @@
 package br.com.senac.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import br.com.senac.model.Carro;
+import br.com.senac.model.Chave;
 import br.com.senac.repository.CarroRepository;
+import br.com.senac.repository.ChaveRepository;
 import javassist.tools.rmi.ObjectNotFoundException;
 
 @Service
@@ -15,30 +18,37 @@ public class CarroService {
 	@Autowired
 	CarroRepository cr;
 
-	public Iterable<Carro> buscarPorTodosCarros() {
-		Iterable<Carro> carros = cr.findAll();
-		return carros;
+	public Carro search(Integer id) throws ObjectNotFoundException {
+		java.util.Optional<Carro> carro = cr.findById(id);
+		return carro.orElseThrow(
+				() -> new ObjectNotFoundException("não encontrado. id: " + id + "Tipo! " + Carro.class.getName()));
+
 	}
 
-	public Carro CarroSalvar(Carro carro) {
+	public List<Carro> searchAll() {
+		return cr.findAll();
+	}
+
+	public Carro save(Carro carro) {
 		return cr.save(carro);
 	}
 
-	public Carro buscarPorId(long id) throws ObjectNotFoundException {
-		Optional<Carro> carro = cr.findById(id);
-		return carro.orElseThrow(() -> new ObjectNotFoundException("Carro não encontrado. id: " + id));
+	public List<Carro> saveAll(List<Carro> carros) {
+		return cr.saveAll(carros);
 	}
 
-	public Carro salvarAlteracao(Carro carroAlterado) throws ObjectNotFoundException {
-		Carro carro = buscarPorId(carroAlterado.getId());
-		carro.setId(carroAlterado.getId());
-		carro.setModelo(carroAlterado.getModelo());
-		carro.setCor(carroAlterado.getCor());
-		return CarroSalvar(carro);
+	public Carro edit(Carro carro) throws ObjectNotFoundException {
+		Carro carroAntigo = search(carro.getId());
+		carroAntigo.setId(carro.getId());
+		carroAntigo.setModelo(carro.getModelo());
+		carroAntigo.setChave(carro.getChave());
+		carroAntigo.setFabricante(carro.getFabricante());
+		carroAntigo.setDocumento(carro.getDocumento());
+		carroAntigo.setAcessorios(carro.getAcessorios());
+		return save(carroAntigo);
 	}
-	
-	public void excluir(long id) {
+
+	public void delete(Integer id) {
 		cr.deleteById(id);
 	}
-
 }

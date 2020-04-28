@@ -12,47 +12,63 @@
 <link rel="stylesheet"
 	href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
-<title>Listar documento</title>
+<title>Cadastro de carro</title>
 </head>
 
-<body class="tada">
-	<a class="dropdown-item bg-dark shadow-lg p-2"></a>
-	<h1
-		class="text-center h1-hover py-5 display-4 lead mt-2 text-primary h6 shadow-lg">Lista
-		de documentos:</h1>
-	<a class="dropdown-item bg-dark shadow-lg p-2"></a>
 
 
-	<div class="container table-responsive mt-3 anyClass">
-		<table class="table table-hover table-striped shadow-lg table-striped">
-			<thead>
-				<tr>
-					<th scope="col">Id</th>
-					<th scope="col">Nome</th>
-					<th scope="col">Codigo</th>
-					<th scope="col"></th>
-
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="documento : ${documentos}">
-					<th scope="row" th:text="${documento.id}" width="30%" class="h6 lead"></th>
-
-					<td th:text="${documento.nome}" width="30%" class="h6 lead"></td>
-					<th scope="row" th:text="${documento.codigo}" width="30%" class="h6 lead"></th>
-					<td><div class="btn-group float-right">
-							<a class="btn btn-sm btn-rounded btn-primary mx-5 px-5"
-								th:href="@{/documento/alterar/{id}(id=${documento.id})}">Alterar</a> <a
-								class="btn btn-sm btn-rounded btn-danger mx-5 px-5"
-								th:href="@{/documento/deletar/{id}(id=${documento.id})}">Excluir</a>
-						</div></td>
-				</tr>
-			</tbody>
-		</table>
-		<a class="btn btn-block btn-rounded btn-success"
-			th:href="@{/documento/cadastrar}">CADASTRAR NOVO DOCUMENTO</a>
+<body class="">
+ <a class="dropdown-item bg-dark shadow-lg p-2 mt-2"></a>
+<h1 class="text-center h1-hover py-5 display-4 lead text-primary h6 shadow-lg">Cadastro de carros: </h1>
+  <a class="dropdown-item bg-dark shadow-mt-0 p-2"></a>
+		<div class="container">
+	<form th:object="${carro}" th:action="@{/carro/salvar}" method="POST">
+		<div class="form-group mt-4">
+			<label class="h6 lead">Modelo</label> 
+			<input class="form-control"
+				th:field="*{modelo}" autofocus="autofocus"> 
+		</div>
+		
+		<div class="form=group">
+			<select class="form-control" th:field="*{chave}">
+			<option value="">Selecione a chave</option>
+			<option th:each="chave : ${chaves}" th:value="${chave.id}" th:text="${chave.id}"></option>
+			</select>
+		</div>
+		
+		<div class="form=group">
+		<label>Documento</label>
+			<select class="form-control" th:field="*{documento}">
+			<option value="">Selecione o documento</option>
+			<option th:each="documento : ${documentos}" th:value="${documento.nome}" th:text="${chave.id}"></option>
+			</select>
+		</div>
+		
+		<div class="form=group">
+		<label>Fabricante</label>
+			<select class="form-control" th:field="*{fabricante}">
+			<option value="">Selecione a fabricante</option>
+			<option th:each="fabricante : ${fabricantes}" th:value="${fabricante.id}" th:text="${fabricante.id}"></option>
+			</select>
+		</div>
+		
+		<div class="form=group">
+		<label>Acessórios</label>
+			<div th:each="acessorio : ${acessorios}">
+			<input type="checkbox" th:field="{acessorios}" th:vakye="${acessorio.id}"/>
+			<label th:for="${('acessorios')}" th:text="${acessorio.nome}"></label>
+			</div>
+		</div>
+		
+		
+		<div class="d-flex justify-content-around">
+	<button type="submit" class="btn btn-success btn-lg btn-rounded">Salvar</button>
+	<a class="btn btn-danger btn-lg btn-rounded" th:href="@{/carro/listar}">Cancelar</a>
 	</div>
+	</form>
+		</div>
 
+	
 
 
 
@@ -71,21 +87,11 @@
 </body>
 
 <style>
-.anyClass {
-	height: 325px;
-	overflow-y: scroll;
-}
-
-body {
-	font-family: "14";
-	src: formato url("Concert One.eot?")(" 
-  eot "), formato url (" Concert One.woff ") (" woff"), formato url("Concert One.ttf")("truetype");
-}
-
-h1, .h1-hover {
-	color: #FFFFFF;
-	background: #FFFFFF;
-	text-shadow: 1px 3px 0 #969696, 1px 13px 5px #aba8a8;
+body { 
+  font-family: "14"; 
+  src: formato url ("Concert One.eot?") (" 
+  eot"), formato url ("Concert One.woff") ("woff"), formato 
+  url ("Concert One.ttf") ("truetype") ; 
 }
 
 .alert {

@@ -8,18 +8,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Documento implements Serializable {
-
-
-	private static final long serialVersionUID = -4268863540952788139L;
+public class Acessorio implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-
 	private String nome;
-	private String codigo;
-
 	public Integer getId() {
 		return id;
 	}
@@ -29,16 +23,10 @@ public class Documento implements Serializable {
 	public String getNome() {
 		return nome;
 	}
+
 	public void setNome(String nome) {
 		this.nome = nome;
-	}
-	public String getCodigo() {
-		return codigo;
-	}
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
+	}	
 	
 	
-
 }

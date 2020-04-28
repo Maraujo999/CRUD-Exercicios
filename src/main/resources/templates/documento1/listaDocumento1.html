@@ -11,37 +11,37 @@
 	crossorigin="anonymous">
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 	<script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
-<title>Mensagem validação</title>
+<title>Lista de documentos cadastrados.</title>
 </head>
 
 <body class="tada">
   <a class="dropdown-item bg-dark shadow-lg p-2"></a>
-<h1 class="text-center h1-hover py-5 display-4 lead mt-2 text-primary h6 shadow-lg">Lista de carros: </h1>
+<h1 class="text-center h1-hover py-5 display-4 lead mt-2 text-primary h6 shadow-lg">Lista de documentos: </h1>
   <a class="dropdown-item bg-dark shadow-lg p-2"></a>
 
 
 <div class="container table-responsive mt-3 anyClass">
-<table class="table table-hover table-striped shadow-lg table-striped">
+<table class="table table-hover table-striped shadow-lg">
   <thead>
     <tr >
       <th scope="col" >Id</th>
+      <th scope="col" >Placa</th>
       <th scope="col" >Modelo</th>
-      <th scope="col" >Cor</th>
     </tr>
   </thead>
   <tbody>
-    <tr th:each="carro : ${carros}">
-      <th scope="row" th:text="${carro.id}" class="h6 lead"></th>
-      <td th:text="${carro.modelo}" class="h6 lead"></td>
-      <td th:text="${carro.cor}" class="h6 lead"></td>
+    <tr th:each="documento : ${documentos}">
+      <th scope="row" th:text="${documento.id}" class="h6 lead"></th>
+      <td th:text="${documento.placa}" class="h6 lead"></td>
+      <td th:text="${documento.modelo}" class="h6 lead"></td>
       <td><div class="btn-group float-right">
-      <a class="btn btn-sm btn-rounded btn-primary mx-5 px-5" th:href="@{/carro/alterar/{idCarro}(idCarro=${carro.id})}">Alterar</a>
-      <a class="btn btn-sm btn-rounded btn-danger mx-5 px-5"  th:href="@{/carro/excluir/{idCarro}(idCarro=${carro.id})}">Excluir</a>
+      <a class="btn btn-sm btn-rounded btn-primary mx-5 px-5" th:href="@{/documento/alterar/{idDocumento}(idDocumento=${documento.id})}">Alterar</a>
+      <a class="btn btn-sm btn-rounded btn-danger mx-5 px-5"  th:href="@{/documento/excluir/{idDocumento}(idDocumento=${documento.id})}">Excluir</a>
       </div></td>
     </tr>
   </tbody>
 </table>
-<a class="btn btn-block btn-rounded btn-success" th:href="@{/carro/cadastrar}">CADASTRAR NOVO CARRO</a>
+<a class="btn btn-block btn-rounded btn-success" th:href="@{/documento/cadastrar}">CADASTRAR NOVO CARRO</a>
 </div>
 
 

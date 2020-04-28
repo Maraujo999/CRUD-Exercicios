@@ -6,6 +6,6 @@ import org.springframework.stereotype.Repository;
 import br.com.senac.model.Documento;
 
 @Repository
-public interface DocumentoRepository extends JpaRepository<Documento, Long> {
+public interface DocumentoRepository extends JpaRepository<Documento, Integer>{
 
 }
